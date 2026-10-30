@@ -16,3 +16,17 @@ export async function getApplications() {
     }
 }
 
+
+export async function sendData(data) {
+    try {
+        const res = await api.post('/application', data, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+        return res
+
+    } catch (error) {
+        console.log(error)
+    }
+}
