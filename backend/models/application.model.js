@@ -6,7 +6,7 @@ const ApplicationSchema = mongoose.Schema({
         ref: 'User',
         required: true
     },
-    company: {
+    companyName: {
         type: String,
         required: true,
         trim: true
