@@ -1,9 +1,43 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { getApplications } from '../../services/application.service'
+import { useState } from 'react'
 
 const AllApplication = () => {
+
+  const [application, setApplication] = useState([])
+
+
+  useEffect(() => {
+    getApplications().then((res) => {
+      try {
+        let data = res.applications
+        console.log(res)
+        setApplication(data)
+      } catch (error) {
+        console.log(error)
+      }
+    })
+  }, [])
+
+
   return (
-    <div>
-      all application
+    <div className='flex gap-10 grid grid-cols-4'>
+      {
+        application.length > 0 ?
+          application.map((elem, idx) => {
+            return (
+              <div id={idx} className='bg-gray-100 gap-1 flex flex-col p-4 rounded-2xl shadow-xl border'>
+                <h1 className='text-2xl font-bold'>{elem.companyName}</h1>
+                <h3 className='text-xl font -semibold font-sans'>{elem.jobTitle}</h3>
+                <p className='bg-cyan-200 w-fit px-2 rounded font-bold '>{elem.location}</p>
+                <p>Status: <span className='text-green-500'>{elem.status}</span></p>
+              </div>
+            )
+          })
+          :
+          <h1>No application found</h1>
+      }
     </div>
   )
 }
