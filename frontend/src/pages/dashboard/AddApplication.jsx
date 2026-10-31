@@ -1,4 +1,3 @@
-import React from 'react'
 
 import Input from '../../components/ui/Input'
 import Button from '../../components/ui/Button'
@@ -40,7 +39,7 @@ const navigate  = useNavigate()
           text="Location"
           register={register}
           name="location" />
-  
+
         <Input
           type="text"
           placeholder="Enter a url"
