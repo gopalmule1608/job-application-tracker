@@ -8,9 +8,9 @@ import { useNavigate } from 'react-router-dom'
 
 const AllApplication = () => {
 
-  const [application, setApplication] = useState([])
+  const navigate = useNavigate()
 
-const navigate = useNavigate
+  const [application, setApplication] = useState([])
   function deleteApplication(id) {
     api.delete(`/application/${id}`,
       {
@@ -19,8 +19,19 @@ const navigate = useNavigate
         }
       }
     )
- 
+    getApplications().then((res) => {
+      let data = res.applications
+      console.log(res)
+      setApplication(data)
+    })
 
+  }
+
+
+  function editApplication(elem) {
+    navigate('/dashboard/edit-application', {
+      state: elem
+    })
   }
 
 
@@ -48,13 +59,26 @@ const navigate = useNavigate
                 <h3 className='text-xl font -semibold font-sans'>{elem.jobTitle}</h3>
                 <p className='bg-cyan-200 w-fit px-2 rounded font-bold '>{elem.location}</p>
                 <p>Status: <span className='text-green-500'>{elem.status}</span></p>
-                <Button
-                  type="button"
-                  text="Delete"
-                  className="mt-2 w-fit py-0"
-                  handler={() => { deleteApplication(elem._id) }}
+                <div className='flex gap-5'>
+                  <Button
+                    type="button"
+                    text="Edit"
+                    className="mt-2 w-fit py-0"
+                    handler={() => {
+                      editApplication(elem)
+                    }}
 
-                />
+                  />
+
+
+                  <Button
+                    type="button"
+                    text="Delete"
+                    className="mt-2 w-fit py-0"
+                    handler={() => { deleteApplication(elem._id) }}
+
+                  />
+                </div>
               </div>
             )
           })

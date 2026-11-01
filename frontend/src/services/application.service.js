@@ -30,3 +30,17 @@ export async function sendData(data) {
         console.log(error)
     }
 }
+
+export async function editData(data,id) {
+    try {
+        const res = await api.put(`/application/${id}`, data, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+        return res
+
+    } catch (error) {
+        console.log(error)
+    }
+}
