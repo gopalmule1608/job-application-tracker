@@ -2,7 +2,11 @@ const Application = require("../models/application.model")
 
 const getAllApplication = async (req, res) => {
     try {
-        const applications = await Application.find()
+        const applications = await Application.find(
+            {
+                userId: req.user.id
+            }
+        )
 
         res.status(200).json({
             message: "Applications Fectch Sucessfully",
@@ -32,8 +36,8 @@ const createApplication = async (req, res) => {
         const formData = req.body
 
         const data = {
-            userId: req.user.id,
-            ...formData
+            ...formData,
+            userId: req.user.id
         }
 
         const application = await Application.create(data)
@@ -84,4 +88,4 @@ const deleteApplication = async (req, res) => {
 
 
 
-module.exports = { getAllApplication, createApplication, getApplication, updateApplication ,deleteApplication}
+module.exports = { getAllApplication, createApplication, getApplication, updateApplication, deleteApplication }

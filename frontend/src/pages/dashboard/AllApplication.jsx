@@ -19,13 +19,12 @@ const AllApplication = () => {
         }
       }
     )
-    getApplications().then((res) => {
-      let data = res.applications
-      console.log(res)
-      setApplication(data)
-    })
+   
+    setApplication((prev) =>
+      prev.filter((elem) => elem._id !== id)
+    )
 
-  }
+  } 
 
 
   function editApplication(elem) {
