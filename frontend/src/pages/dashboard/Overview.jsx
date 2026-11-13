@@ -3,7 +3,7 @@ import React from 'react'
 const Overview = () => {
   return (
     <div>
-      this is overiew js datatttatattat
+      This page content the all task box show like the total apllied pemding interview and give above all represeent in grah data representation 
     </div>
   )
 }
